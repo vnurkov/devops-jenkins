@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: hello-py
-        image: 192.168.31.191:5000/hello-py
+        image: localhost:5000/hello-py
         ports:
         - containerPort: 8181
 
