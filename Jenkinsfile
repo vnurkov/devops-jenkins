@@ -18,7 +18,7 @@ pipeline {
     }
 
     stage('Build image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build dockerimagename
         }
@@ -26,17 +26,14 @@ pipeline {
     }
 
     stage('Pushing Image') {
-      steps{
-        script {
-          docker.withRegistry( 'http://192.168.31.191:5000' ) {
-            dockerImage.push("latest")
-          }
-        }
+      steps {
+        sh 'docker tag hello-py 192.168.31.191:5000/hello-py'
+        sh 'docker push 192.168.31.191:5000/hello-py'
       }
     }
 
     stage('Deploy to kubernetes') {
-      steps{
+      steps {
         script {
           kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kubernetes")
         }
