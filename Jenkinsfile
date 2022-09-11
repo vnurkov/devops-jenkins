@@ -27,8 +27,8 @@ pipeline {
 
     stage('Pushing Image') {
       steps {
-        sh 'docker tag hello-py localhost:5000/hello-py'
-        sh 'docker push localhost:5000/hello-py'
+        sh 'docker tag hello-py localhost:5000/hello-py:latest'
+        sh 'docker push localhost:5000/hello-py:latest'
       }
     }
 
