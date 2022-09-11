@@ -1,0 +1,37 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-py
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-py
+  template:
+    metadata:
+      labels:
+        app: hello-py
+    spec:
+      containers:
+      - name: hello-py
+        image: localhost:5000/my-python
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8181
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-py
+  namespace: default
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8181
+    targetPort: 8181
+  selector:
+    app: hello-py
