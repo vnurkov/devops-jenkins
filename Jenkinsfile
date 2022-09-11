@@ -1,6 +1,6 @@
 pipeline {
   
-  agent {label 'kubepod'}
+  agent any
 
   environment {
     dockerimagename = "hello-py"
@@ -16,7 +16,7 @@ pipeline {
         }
       }
     }
-    
+
     stage('Build image') {
       steps{
         script {
