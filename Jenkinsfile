@@ -19,9 +19,8 @@ pipeline {
 
     stage('Build image') {
       steps{
-        script {
-          dockerImage = docker.build dockerimagename
-        }
+        sh 'eval $(minikube docker-env)'
+        sh 'docker build -t hello-py .'
       }
     }
 
