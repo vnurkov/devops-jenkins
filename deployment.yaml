@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - name: hello-py
-        image: localhost:5000/hello-py
+        image: localhost:5000/hello-py:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8181
 
