@@ -19,8 +19,19 @@ pipeline {
 
     stage('Build image') {
       steps{
-        sh 'eval $(minikube docker-env)'
-        sh 'docker build -t hello-py .'
+        script {
+          dockerImage = docker.build dockerimagename
+        }
+      }
+    }
+
+    stage('Pushing Image') {
+      steps{
+        script {
+          docker.withRegistry( '192.168.31.191:5000' ) {
+            dockerImage.push("latest")
+          }
+        }
       }
     }
 
