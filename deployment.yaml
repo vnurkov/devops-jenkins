@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-py-svc
+  name: hello-py
   namespace: default
 spec:
   ports:
