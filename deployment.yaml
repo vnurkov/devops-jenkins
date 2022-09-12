@@ -46,32 +46,3 @@ spec:
   type: NodePort
   selector:
     app: hello-py
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: app-ingress
-  namespace: kube-system
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: hello-john.test
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: hello-py-svc
-                port:
-                  number: 80
-    - host: hello-jane.test
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: hello-py-svc
-                port:
-                  number: 80
