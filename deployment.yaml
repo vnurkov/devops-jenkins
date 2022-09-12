@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-py
+  name: hello-py-ext
   namespace: kube-system
 spec:
   type: ExternalName
@@ -35,7 +35,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-py
+  name: hello-py-svc
   namespace: default
 spec:
   ports:
@@ -46,3 +46,32 @@ spec:
   type: NodePort
   selector:
     app: hello-py
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  namespace: kube-system
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: hello-john.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-py-svc
+                port:
+                  number: 80
+    - host: hello-jane.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-py-svc
+                port:
+                  number: 80
