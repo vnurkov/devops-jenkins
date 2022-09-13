@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: hello-john.test
+    - host: hello-py.local
       http:
         paths:
           - path: /
@@ -16,10 +16,15 @@ spec:
                 name: hello-py-ext
                 port:
                   number: 80
-    - host: hello-jane.test
-      http:
-        paths:
-          - path: /
+
+          - path: /foo
+            pathType: Prefix
+            backend:
+              service:
+                name: hello-py-ext
+                port:
+                  number: 80
+          - path: /bar
             pathType: Prefix
             backend:
               service:
